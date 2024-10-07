@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class ChestGeneration : MonoBehaviour
+public class ChestGeneration : MonobehaviourSingleton<ChestGeneration>
 {
     [SerializeField] private Button generateChestButton;
     [SerializeField] private List<ChestSO> chestList;
@@ -28,7 +28,7 @@ public class ChestGeneration : MonoBehaviour
 
         if (availableSlotIndex == -1)
         {
-            Debug.Log("All chest slots are full!");
+            PopupManager.instance.DisplayInfoPopup("SLOTS ARE FULL");
             return; 
         }
 
@@ -36,12 +36,14 @@ public class ChestGeneration : MonoBehaviour
         int randomIndex = Random.Range(0, chestList.Count);
         ChestSO generatedChest = chestList[randomIndex];
         ChestDIsplayInfo availableSlot = chestDIsplayInfos[availableSlotIndex];
-        availableSlot.chestView.chestImage.sprite = generatedChest.lockedChest;
-        availableSlot.chestView.nameText.text = "Chest: " + generatedChest.chestName;
+        ChestView chestView = availableSlot.chestView;
+        chestView.chestImage.sprite = generatedChest.lockedChest;
+        chestView.nameText.text = "Chest: " + generatedChest.chestName;
+        chestView.chestModel.chestSO = generatedChest;
+        chestView.chestController.AddButtonlisterner();
         availableSlot.isEmpty = false;
-        availableSlot.chestView.chestModel.chestSO =generatedChest;
-        availableSlot.chestView.EnableButton();
-        Debug.Log($"Generated {generatedChest.chestName} in slot {availableSlotIndex}");
+       
+       
     }
 
    
@@ -55,6 +57,30 @@ public class ChestGeneration : MonoBehaviour
             }
         }
         return -1; 
+    }
+
+    public void OpenChest(ChestView chestView)
+    {
+        foreach(ChestDIsplayInfo chestInfo in chestDIsplayInfos)
+        {
+            if(chestInfo.chestView==chestView)
+            {
+                chestInfo.isEmpty = true;
+            }
+        }
+        
+
+        
+    }
+    public bool IsTimerRunning()
+    {
+        foreach (ChestDIsplayInfo chestInfo in chestDIsplayInfos)
+        {
+            if (chestInfo.chestView.chestController.isTimerRunning)
+                return true;
+
+        }
+        return false;
     }
 
    

@@ -5,7 +5,7 @@ public class WaitingState : IChestState
 {
     private ChestView chestView;
     private ChestController chestController;
-    private float waitTime = 5.0f;
+    private float waitTime;
     private float timer;
     private bool isTimerCompleted;
 
@@ -17,7 +17,9 @@ public class WaitingState : IChestState
 
     public void EnterState()
     {
-        timer = 0f;
+        timer = 0;
+        waitTime = chestView.chestModel.chestSO.timerDuration;
+
     }
     public void UpdateState()
     {

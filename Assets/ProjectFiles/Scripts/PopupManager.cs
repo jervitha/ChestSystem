@@ -11,8 +11,10 @@ public class PopupManager : MonobehaviourSingleton<PopupManager>
     [SerializeField] private Button confirmationyesButton;
     [SerializeField] private Button confirmationNoButton;
     [SerializeField] private Button confirmationBackButton;
-    [SerializeField] private string confirmationText;
-    private ChestController lastInteractedChestController;
+    private ChestController lastChestController;
+
+
+
 
     [SerializeField] private GameObject infoPopup; // popup for information purposes
     [SerializeField] private TextMeshProUGUI infoPopupText;
@@ -26,7 +28,7 @@ public class PopupManager : MonobehaviourSingleton<PopupManager>
 
     private void OnEnable()
     {
-        confirmationBackButton.onClick.AddListener(CloseConfirmationPopup);
+        confirmationBackButton.onClick.AddListener(OnbackbuttonClick);
         infoOkButton.onClick.AddListener(CloseInfoPopup);
         confirmationyesButton.onClick.AddListener(CloseConfirmationPopup);
         confirmationNoButton.onClick.AddListener(CloseConfirmationPopup);
@@ -44,18 +46,31 @@ public class PopupManager : MonobehaviourSingleton<PopupManager>
 
     public void DisplayConfirmationPopup(ChestController chestController)
     {
-        lastInteractedChestController = chestController;
+        int GemsToUnlock = chestController.chestModel.chestSO.gemsToOpen;
+        lastChestController = chestController;
         confirmationPopup.SetActive(true);
-        confirmationpopupText.text = confirmationText;
+        confirmationpopupText.text = $"DO YOU WANT TO UNLOCK THE CHEST USING{ GemsToUnlock} GEMS?";
         confirmationyesButton.onClick.RemoveAllListeners();
         confirmationNoButton.onClick.RemoveAllListeners();
         confirmationyesButton.onClick.AddListener(() =>
         {
-            chestController.UnlockChest();  
-            CloseConfirmationPopup();    
+            if(GemsToUnlock>ResourcesDisplay.instance.gems)
+            {
+                DisplayInfoPopup("YOU DON'T HAVE ENOUGH GEMS");
+                return;
+            }
+            chestController.UnlockChest();
+
+            ResourcesDisplay.instance.AddGems(GemsToUnlock *-1);
+            CloseConfirmationPopup();
         });
         confirmationNoButton.onClick.AddListener(() =>
         {
+            if(ChestGeneration.instance.IsTimerRunning())
+            {
+                DisplayInfoPopup("THE TIMER IS ALREADY RUNNING");
+                return;
+            }
             chestController.WaitForConfirmation();  
             CloseConfirmationPopup();
             
@@ -74,7 +89,7 @@ public class PopupManager : MonobehaviourSingleton<PopupManager>
     private void CloseConfirmationPopup()
     {
         confirmationPopup.SetActive(false);
-        lastInteractedChestController.AddButtonlisterner();
+        
         
     }
 
@@ -83,4 +98,10 @@ public class PopupManager : MonobehaviourSingleton<PopupManager>
         infoPopup.SetActive(false);
     }
 
+    private void OnbackbuttonClick()
+    {
+        confirmationPopup.SetActive(false);
+        lastChestController.AddButtonlisterner();
+
+    }
 }

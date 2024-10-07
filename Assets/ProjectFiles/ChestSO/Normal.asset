@@ -16,6 +16,8 @@ MonoBehaviour:
   maxCoins: 200
   minGems: 30
   maxGems: 40
+  timerDuration: 10
+  gemsToOpen: 10
   lockedChest: {fileID: 21300000, guid: 6a5ac34960eeb70468fe1c948deece88, type: 3}
   chestName: Normal
   unlockedChest: {fileID: 21300000, guid: 2905d78d14f587c4b9162b9ddb0fd679, type: 3}

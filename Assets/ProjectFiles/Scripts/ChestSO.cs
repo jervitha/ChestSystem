@@ -8,9 +8,12 @@ public class ChestSO : ScriptableObject
     public int maxCoins;
     public int minGems;
     public int maxGems;
+    public float timerDuration;
+    public int gemsToOpen;
     
     public Sprite lockedChest;
     public string chestName;
     public Sprite unlockedChest;
+    
     
 }

@@ -10,19 +10,15 @@ public class ChestView : MonoBehaviour
     public ChestModel chestModel;
     public ChestController chestController;
     public  Button button ;
-    [SerializeField] public Image chestImage;
-    [SerializeField] public TextMeshProUGUI chestStateText;
-  
-    [SerializeField] private TextMeshProUGUI timerText;
+    public Image chestImage;
     public TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI timerText;
+    
 
-   
-
-
-    void Start()
+   void Start()
     {
         chestModel = new ChestModel();
-        chestController = new ChestController(this,button);
+        chestController = new ChestController(this,button,chestModel);
         chestController.Start();
     }
 
@@ -30,8 +26,6 @@ public class ChestView : MonoBehaviour
     {
        
         chestImage.sprite = chestModel.chestSO.unlockedChest;
-        chestStateText.text = "Chest Unlocked!";
-        
     }
 
     private void Update()
@@ -43,12 +37,10 @@ public class ChestView : MonoBehaviour
     {
         timerText.text = "Time left: " + Mathf.Ceil(timeLeft).ToString() + "s";
     }
-    public void DisableButton()
+    
+    public void ResetTimerText()
     {
-        button.enabled = false;
+        timerText.text = " ";
     }
-    public void EnableButton()
-    {
-        button.enabled = true;
-    }
+    
 }

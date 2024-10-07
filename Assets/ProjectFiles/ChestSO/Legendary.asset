@@ -16,6 +16,8 @@ MonoBehaviour:
   maxCoins: 300
   minGems: 20
   maxGems: 30
+  timerDuration: 5
+  gemsToOpen: 5
   lockedChest: {fileID: 21300000, guid: cfb25f69f9637e44a99caa6b53c7cf03, type: 3}
   chestName: Legendary
   unlockedChest: {fileID: 21300000, guid: 4268af316d134ec41bf709e382abfac1, type: 3}
