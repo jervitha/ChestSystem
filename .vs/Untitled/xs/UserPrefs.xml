@@ -1,28 +1,30 @@
 ﻿<Properties StartupConfiguration="{68B96012-62E2-EB6E-D159-884EB7E830EB}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ProjectFiles/Scripts/ChestDIsplayInfo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ProjectFiles/Scripts/ChestMvc/ChestView.cs">
     <Files>
-      <File FileName="Assets/ProjectFiles/Scripts/ResourcesDisplay.cs" Line="33" Column="1" />
-      <File FileName="Assets/ProjectFiles/Scripts/StateMachine/UnLockedState.cs" />
-      <File FileName="Assets/ProjectFiles/Scripts/ChestMvc/ChestController.cs" />
-      <File FileName="Assets/ProjectFiles/Scripts/ChestMvc/ChestView.cs" />
-      <File FileName="Assets/ProjectFiles/Scripts/ChestSO.cs" />
-      <File FileName="Assets/ProjectFiles/Scripts/PopupManager.cs" />
-      <File FileName="Assets/ProjectFiles/Scripts/ChestMvc/ChestModel.cs" />
+      <File FileName="Assets/ProjectFiles/Scripts/ResourcesDisplay.cs" Line="19" Column="6" />
+      <File FileName="Assets/ProjectFiles/Scripts/StateMachine/UnLockedState.cs" Line="21" Column="9" />
+      <File FileName="Assets/ProjectFiles/Scripts/ChestMvc/ChestController.cs" Line="56" Column="9" />
+      <File FileName="Assets/ProjectFiles/Scripts/ChestMvc/ChestView.cs" Line="21" Column="69" />
+      <File FileName="Assets/ProjectFiles/Scripts/ChestSO.cs" Line="12" Column="27" />
+      <File FileName="Assets/ProjectFiles/Scripts/PopupManager.cs" Line="71" Column="66" />
+      <File FileName="Assets/ProjectFiles/Scripts/ChestMvc/ChestModel.cs" Line="10" Column="1" />
       <File FileName="Assets/ProjectFiles/Scripts/StateMachine/IChestState.cs" />
-      <File FileName="Assets/ProjectFiles/Scripts/StateMachine/WaitingState.cs" />
+      <File FileName="Assets/ProjectFiles/Scripts/StateMachine/WaitingState.cs" Line="11" Column="5" />
       <File FileName="Assets/ProjectFiles/Scripts/StateMachine/LockedState.cs" />
-      <File FileName="Assets/ProjectFiles/Scripts/ChestGeneration.cs" />
+      <File FileName="Assets/ProjectFiles/Scripts/ChestGeneration.cs" Line="83" Column="22" />
       <File FileName="Assets/ProjectFiles/Scripts/ChestDIsplayInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets/ProjectFiles/Scripts/MonobehaviourSingleton.cs" />
+      <File FileName="Assets/ProjectFiles/Scripts/MonobehaviourSingleton.cs" Line="22" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Untitled" expanded="True">
-            <Node name="Assets" expanded="True" selected="True">
+            <Node name="Assets" expanded="True">
               <Node name="ProjectFiles" expanded="True">
                 <Node name="Scripts" expanded="True">
-                  <Node name="ChestMvc" expanded="True" />
+                  <Node name="ChestMvc" expanded="True">
+                    <Node name="ChestView.cs" selected="True" />
+                  </Node>
                   <Node name="StateMachine" expanded="True" />
                 </Node>
               </Node>

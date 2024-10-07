@@ -8,6 +8,7 @@ public class WaitingState : IChestState
     private float waitTime;
     private float timer;
     private bool isTimerCompleted;
+    
 
     public WaitingState(ChestController _chestController, ChestView _chestView)
     {
