@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class ResourcesDisplay :MonobehaviourSingleton<ResourcesDisplay>
 {
-    public int coins { get; private set; } = 0;
-    public int gems { get; private set; } = 0;
+    private int coins;
+
+    private int gems;
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private TextMeshProUGUI gemsText;
 
@@ -29,5 +30,15 @@ public class ResourcesDisplay :MonobehaviourSingleton<ResourcesDisplay>
         gemsText.text = "Gems: " + gems.ToString();
 
     }
+    public int GetCoins()
+    {
+        return coins;
+    }
+    public int GetGems()
+    {
+        return gems;
+    }
+
+
     
 }

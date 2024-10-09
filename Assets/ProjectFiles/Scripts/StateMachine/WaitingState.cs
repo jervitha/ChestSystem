@@ -19,7 +19,7 @@ public class WaitingState : IChestState
     public void EnterState()
     {
         timer = 0;
-        waitTime = chestView.chestModel.chestSO.timerDuration;
+        waitTime = chestController.GetSO().timerDuration;
 
     }
     public void UpdateState()

@@ -46,36 +46,17 @@ public class PopupManager : MonobehaviourSingleton<PopupManager>
 
     public void DisplayConfirmationPopup(ChestController chestController)
     {
-        int GemsToUnlock = chestController.chestModel.chestSO.gemsToOpen;
+       
         lastChestController = chestController;
+        int GemsToUnlock = lastChestController.GetSO().gemsToOpen;
         confirmationPopup.SetActive(true);
         confirmationpopupText.text = $"DO YOU WANT TO UNLOCK THE CHEST USING{ GemsToUnlock} GEMS?";
         confirmationyesButton.onClick.RemoveAllListeners();
         confirmationNoButton.onClick.RemoveAllListeners();
-        confirmationyesButton.onClick.AddListener(() =>
-        {
-            if(GemsToUnlock>ResourcesDisplay.instance.gems)
-            {
-                DisplayInfoPopup("YOU DON'T HAVE ENOUGH GEMS");
-                return;
-            }
-            chestController.UnlockChest();
+        confirmationyesButton.onClick.AddListener(OnyesButtonClick);
 
-            ResourcesDisplay.instance.AddGems(GemsToUnlock *-1);
-            CloseConfirmationPopup();
-        });
-        confirmationNoButton.onClick.AddListener(() =>
-        {
-            if(ChestGeneration.instance.IsTimerRunning())
-            {
-                DisplayInfoPopup("THE TIMER IS ALREADY RUNNING");
-                return;
-            }
-            chestController.WaitForConfirmation();  
-            CloseConfirmationPopup();
-            
-        });
 
+        confirmationNoButton.onClick.AddListener(OnNoButtonClick);
     }
 
     public void DisplayInfoPopup(string text)
@@ -103,5 +84,30 @@ public class PopupManager : MonobehaviourSingleton<PopupManager>
         confirmationPopup.SetActive(false);
         lastChestController.AddButtonlisterner();
 
+    }
+
+    private void OnyesButtonClick()
+    {
+        int GemsToUnlock = lastChestController.GetSO().gemsToOpen;
+        if (GemsToUnlock > ResourcesDisplay.Instance.GetGems())
+        {
+            DisplayInfoPopup("YOU DON'T HAVE ENOUGH GEMS");
+            return;
+        }
+        lastChestController.UnlockChest();
+
+        ResourcesDisplay.Instance.AddGems(GemsToUnlock * -1);
+        CloseConfirmationPopup();
+    }
+
+    private void OnNoButtonClick()
+    {
+        if (ChestGeneration.Instance.IsTimerRunning())
+        {
+            DisplayInfoPopup("THE TIMER IS ALREADY RUNNING");
+            return;
+        }
+        lastChestController.WaitForConfirmation();
+        CloseConfirmationPopup();
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class MonobehaviourSingleton<T> : MonoBehaviour where T:Component
 {
 
-    public static T instance { get; private set; }
+    private static T instance;
+    public static T Instance { get { return instance; } }
     public virtual void Awake()
     {
         if(instance==null)

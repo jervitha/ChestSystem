@@ -7,11 +7,12 @@ using TMPro;
 public class ChestView : MonoBehaviour
 {
 
-    public ChestModel chestModel;
-    public ChestController chestController;
+    private ChestModel chestModel;
+    private ChestController chestController;
+    public ChestController ChestController { get { return chestController; } }
     public  Button button ;
-    public Image chestImage;
-    public TextMeshProUGUI nameText;
+    private Image chestImage;
+    private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI timerText;
     
 
@@ -41,6 +42,14 @@ public class ChestView : MonoBehaviour
     public void ResetTimerText()
     {
         timerText.text = " ";
+    }
+    public void SetImageSprite(Sprite sprite)
+    {
+        chestImage.sprite = sprite; 
+    }
+    public void SetText(string text)
+    {
+        nameText.text = text;
     }
     
 }

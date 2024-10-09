@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 using System.Threading.Tasks;
 public class ChestController 
 {
-    public  ChestView chestView;
+    private  ChestView chestView;
     public ChestModel chestModel;
     private IChestState currentState;
     private LockedState lockedState;
@@ -31,7 +31,7 @@ public class ChestController
 
         chestModel = _chestModel;
         lockedState = new LockedState();
-        unLockedState = new UnLockedState(this);
+        unLockedState = new UnLockedState(chestView);
         waitingState = new WaitingState(this, chestView);
 
     }
@@ -58,7 +58,7 @@ public class ChestController
         await Task.Delay(2000);
         button.image.sprite = null;
         SetState(lockedState);
-        ChestGeneration.instance.OpenChest(chestView);
+        ChestGeneration.Instance.OpenChest(chestView);
         chestView.ResetTimerText();
 
     }
@@ -82,11 +82,16 @@ public class ChestController
     {
         button.onClick.AddListener(() =>
         {
-            PopupManager.instance.DisplayConfirmationPopup(this);
+            PopupManager.Instance.DisplayConfirmationPopup(this);
             button.onClick.RemoveAllListeners();
 
         });
 
+    }
+
+    public ChestSO GetSO()
+    {
+        return chestModel.chestSO;
     }
 
 }

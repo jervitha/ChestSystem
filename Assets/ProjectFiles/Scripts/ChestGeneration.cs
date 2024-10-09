@@ -28,7 +28,7 @@ public class ChestGeneration : MonobehaviourSingleton<ChestGeneration>
 
         if (availableSlotIndex == -1)
         {
-            PopupManager.instance.DisplayInfoPopup("SLOTS ARE FULL");
+            PopupManager.Instance.DisplayInfoPopup("SLOTS ARE FULL");
             return; 
         }
 
@@ -37,10 +37,11 @@ public class ChestGeneration : MonobehaviourSingleton<ChestGeneration>
         ChestSO generatedChest = chestList[randomIndex];
         ChestDIsplayInfo availableSlot = chestDIsplayInfos[availableSlotIndex];
         ChestView chestView = availableSlot.chestView;
-        chestView.chestImage.sprite = generatedChest.lockedChest;
-        chestView.nameText.text = "Chest: " + generatedChest.chestName;
-        chestView.chestModel.chestSO = generatedChest;
-        chestView.chestController.AddButtonlisterner();
+        ChestController chestController = chestView.ChestController;
+        chestView.SetImageSprite(generatedChest.lockedChest);
+        chestView.SetText("Chest: " + generatedChest.chestName);
+        chestController.chestModel.chestSO = generatedChest;
+        chestController.AddButtonlisterner();
         availableSlot.isEmpty = false;
        
        
@@ -76,7 +77,7 @@ public class ChestGeneration : MonobehaviourSingleton<ChestGeneration>
     {
         foreach (ChestDIsplayInfo chestInfo in chestDIsplayInfos)
         {
-            if (chestInfo.chestView.chestController.isTimerRunning)
+            if (chestInfo.chestView.ChestController.isTimerRunning)
                 return true;
 
         }
